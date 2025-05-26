@@ -1,0 +1,54 @@
+name: CI/CD Pipeline Demo
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0 # Fetches all history for all branches and tags.
+
+    - name: Step 1: Run Tests
+      run: |
+        echo "--- Starting Test Phase ---"
+        echo "Running unit tests..."
+        echo "Running integration tests..."
+        echo "Tests completed successfully!"
+        echo "--------------------------"
+
+    - name: Step 2: Build Application
+      run: |
+        echo "--- Starting Build Phase ---"
+        echo "Installing dependencies..."
+        echo "Compiling application code..."
+        echo "Creating build artifacts (e.g., Docker image, JAR file)..."
+        echo "Build completed successfully!"
+        echo "--------------------------"
+
+    - name: Step 3: Deploy to Staging
+      # This step only runs if the 'build' step succeeded
+      if: success()
+      run: |
+        echo "--- Starting Deployment Phase (Staging) ---"
+        echo "Authenticating to cloud provider..."
+        echo "Deploying build artifacts to staging environment..."
+        echo "Running post-deployment health checks..."
+        echo "Deployment to staging successful!"
+        echo "-----------------------------------------"
+
+    - name: Step 4: Deploy to Production (Manual approval or conditional)
+      # This step could be made conditional on a manual approval or a specific branch
+      # For demo purposes, we'll just echo it as if it's the next step
+      run: |
+        echo "--- Starting Deployment Phase (Production) ---"
+        echo "Production deployment often requires manual approval or specific conditions."
+        echo "Simulating deployment to production environment..."
+        echo "Production deployment initiated!"
+        echo "--------------------------------------------"
