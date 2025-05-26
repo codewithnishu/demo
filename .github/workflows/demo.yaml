@@ -15,7 +15,7 @@ jobs:
       with:
         fetch-depth: 0 # Fetches all history for all branches and tags.
 
-    - name: Step 1: Run Tests
+    - name: Step 1 Run Tests
       run: |
         echo "--- Starting Test Phase ---"
         echo "Running unit tests..."
@@ -23,7 +23,7 @@ jobs:
         echo "Tests completed successfully!"
         echo "--------------------------"
 
-    - name: Step 2: Build Application
+    - name: Step 2 Build Application
       run: |
         echo "--- Starting Build Phase ---"
         echo "Installing dependencies..."
@@ -32,7 +32,7 @@ jobs:
         echo "Build completed successfully!"
         echo "--------------------------"
 
-    - name: Step 3: Deploy to Staging
+    - name: Step 3 Deploy to Staging
       # This step only runs if the 'build' step succeeded
       if: success()
       run: |
@@ -43,7 +43,7 @@ jobs:
         echo "Deployment to staging successful!"
         echo "-----------------------------------------"
 
-    - name: Step 4: Deploy to Production (Manual approval or conditional)
+    - name: Step 4 Deploy to Production (Manual approval or conditional)
       # This step could be made conditional on a manual approval or a specific branch
       # For demo purposes, we'll just echo it as if it's the next step
       run: |
